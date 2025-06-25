@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Problem 4</title>
+</head>
+<body>
+  <pre id="output" style="margin-top: 20px; font-weight: bold;"></pre>
+  <script>
+    function Multiple() {
+      const Multiples = [1, 2, 8, 9, 12, 46, 76, 82, 15, 20, 30];
+      const result = {};
+
+      for (let i = 1; i <= 9; i++) {
+        result[i] = 0;
+      }
+
+      for (let num of Multiples) {
+        for (let i = 1; i <= 9; i++) {
+          if (num % i === 0) {
+            result[i]++;
+          }
+        }
+      }
+
+      const outputvalue = "[" + Object.entries(result)
+        .map(([key, value]) => `${key}:${value}`)
+        .join(", ") + "]";
+
+      document.getElementById("output").innerText = outputvalue;
+    }
+    window.onload =Multiple;
+  </script>
+
+</body>
+</html>

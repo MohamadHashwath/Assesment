@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Problem 3</title>
+</head>
+<body>
+  <label>Enter a number:</label>
+  <input type="number" id="input" /><br>
+  <button onclick="generateSeries()">Submit</button>
+
+  <div id="output" style="margin-top: 20px; font-weight: bold;"></div>
+
+  <script>
+    function generateSeries() {
+      const a = parseInt(document.getElementById("input").value);
+      let count = a % 2 === 0 ? a - 1 : a; 
+      let result = [];
+
+      for (let i = 0; i < count; i++) {
+        result.push(2 * i + 1);
+      }
+
+      document.getElementById("output").innerText = result.join(", ");
+    }
+  </script>
+
+</body>
+</html>

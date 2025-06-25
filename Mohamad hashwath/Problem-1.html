@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>problem 1</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+    }
+    input {
+      padding: 6px;
+      width: 100%;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    div button.operation {
+      padding: 16px;
+      margin: 4px;
+      font-size: 16px;
+    }
+    div {
+      text-align: center;
+    }
+    #equal {
+      padding: 10px;
+      width: 100%;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    .selected {
+      background-color: #000000;
+      color: white;
+      border: 2px solid #000000;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Calculator</h2>
+
+  <label>First Number A</label>
+  <input type="number" id="a" step="any" />
+
+  <label>Second Number B</label>
+  <input type="number" id="b" step="any" />
+
+  <div>
+    <button class="operation" value="add"> + </button>
+    <button class="operation" value="subtract"> - </button>
+    <button class="operation" value="multiply"> * </button>
+    <button class="operation" value="divide"> / </button>
+  </div>
+
+  <button id="equal" onclick="performCalculation()">=</button>
+
+  <div id="result"></div>
+
+  <script>
+    let selectedOperation = null;
+
+    // Handle button selection and highlighting
+    const operationButtons = document.querySelectorAll(".operation");
+    operationButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        selectedOperation = button.value;
+
+        // Remove 'selected' from all buttons first
+        operationButtons.forEach(btn => btn.classList.remove("selected"));
+        // Highlight the clicked one
+        button.classList.add("selected");
+      });
+    });
+
+    class Calculator {
+      constructor(a, b, operation) {
+        this.a = a;
+        this.b = b;
+        this.operation = operation;
+      }
+
+      calculate() {
+        switch (this.operation) {
+          case "add":
+            return this.a + this.b;
+          case "subtract":
+            return this.a - this.b;
+          case "multiply":
+            return this.a * this.b;
+          case "divide":
+            if (this.b === 0) {
+              return "Error: Cannot divide by zero!";
+            }
+            return this.a / this.b;
+          default:
+            return "Error: No operation selected!";
+        }
+      }
+    }
+
+    function performCalculation() {
+      const a = parseFloat(document.getElementById("a").value);
+      const b = parseFloat(document.getElementById("b").value);
+
+      if (!selectedOperation) {
+        document.getElementById("result").innerText = "Please select an operation.";
+        return;
+      }
+
+      const calc = new Calculator(a, b, selectedOperation);
+      const result = calc.calculate();
+
+      document.getElementById("result").innerText = "Result: " + result;
+    }
+  </script>
+
+</body>
+</html>
